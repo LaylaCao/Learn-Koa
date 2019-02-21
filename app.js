@@ -4,14 +4,35 @@ const Koa = require('koa');
 // 创建一个Koa对象表示web app本身:
 const app = new Koa();
 
-// 对于任何请求，app将调用该异步函数处理请求：
+// logger
+
 app.use(async (ctx, next) => {
     await next();
-    ctx.response.type = 'text/html';
-    ctx.response.body = '<h1>Hello, koa2!</h1>';
+    const rt = ctx.response.get('X-Response-Time');
+    console.log(`${ctx.method} ${ctx.url} - ${rt}`);
 });
 
-// 在端口3000监听:
-app.listen(3000);
-console.log('app started at port 3000...');
+// x-response-time
 
+app.use(async (ctx, next) => {
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    ctx.set('X-Response-Time', `${ms}ms`);
+});
+
+// response
+
+app.use(async ctx => {
+    ctx.body = 'Hello World';
+});
+
+app.listen(3000);
+
+// app.listen是以下方法的语法糖
+/*
+const http = require('http');
+const Koa = require('koa');
+const app = new Koa();
+http.createServer(app.callback()).listen(3000);
+*/
