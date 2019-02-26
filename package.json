@@ -1,0 +1,8 @@
+{
+  "name": "Learn-Koa",
+  "version": "1.0.0",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0"
+  }
+}
