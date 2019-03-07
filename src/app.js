@@ -14,6 +14,8 @@ var router = new Router();
 
 
 // logger
+// 实际上 Koa 的中间件能接收的参数有两个: ctx 和 next, next 参数为一个异步函数（调用时须在之前添加 await 关键字，以挂起当前正在运行的中间件），
+// 用于转移中间件的运行权：
 
 app.use(async (ctx, next) => {
     await next();

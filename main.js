@@ -5,7 +5,8 @@ app.use(async(ctx)=>{
 	// 从上下文中直接获取数据
 	let ctx_query = ctx.query; //query返回格式化的对象
 	let ctx_querystring = ctx.querystring; //querystring返回原字符
-	// 从上下文的request对象中获取
+    // 从上下文的request对象中获取
+    // ctx.request 为一个 Koa Request 对象，该对象保存有一些与用户请求相关的数据，如 Cookie、查询字符串和请求头等。
 	let request=ctx.request;
 	let req_query=request.query; //query返回格式化好的对象
 	let req_querystring=request.querystring; //querystring返回原字符串。
